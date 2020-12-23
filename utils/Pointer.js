@@ -26,7 +26,7 @@ Circle.prototype.draw = function (context) {
   // 旋转
   context.rotate(this.rotation);
   // 缩放
-  // context.scale(this.scaleX, this.scaleY);
+   context.scale(this.scaleX, this.scaleY);
 
   if (this.img) {
     var imgX = -this.width / 2;

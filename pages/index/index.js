@@ -5,19 +5,104 @@ var Pointer = require('../../utils/Pointer.js');
 var Wheel = require('../../utils/Wheel.js');
 Page({
 
+
   /**
    * 页面的初始数据
    */
   data: {
+    systemFlag:"",
     windowWidth: 0,
     windowHeight: 0,
     wheelImg: 'assets/wheel.png',
     pointImg: 'assets/point.png',
-    touch: { x: 0, y: 0, isPressed: false }
+    touch: { x: 0, y: 0, isPressed: false },
+
+    name:"",
+    phone:"",
+    prizeInfo:[  
+      {
+        set:"奖品一",
+        Info:"极地附实打实大师大幅度发生的水电费水电费十多个放入近"
+      },
+      {
+        set:"奖品二",
+        Info:"极地附近撒大声地"
+      },
+                  
+  ],//奖项设置
+    prizeInfoLengh:500
   },
 
   touchMove: function (event) {
 
+  },
+  bindKeyProfession:function(event){
+    console.log(event)
+  if(event.currentTarget.dataset.index==1)//姓名
+  {
+    this.data.name=event.detail.value
+  }
+  else if(event.currentTarget.dataset.index==2){//手机号
+    this.data.phone=event.detail.value
+  }
+  },
+  //初始化系统
+  iniDatabase:function(){
+    const db = wx.cloud.database()
+    db.collection('turntable_system').doc('system').get().then(res=>{
+      console.log(res.data.dateFlag)
+      this.data.systemFlag=res.data.Flag
+    }).then(res=>{
+      console.log("后面",this.data.systemFlag)
+    
+    })
+
+  },
+  bindingInfo:function(){
+    var phoneError=checkPhone(this.data.phone)
+    var nameError=checkName(this.data.name)
+    if(phoneError==0&&nameError==0){
+      console.log("正确")
+      saveNamePhone("turntable_user",this.data.phone,this.data.name,this.data.systemFlag)
+    }else{
+      console.log("错误")
+    }
+   
+    function checkName(name){
+      if(name.length!=0){
+        return 0
+      }else{
+        return 1
+      }
+    }
+
+    function checkPhone(phoneNum){
+      if(phoneNum.length==11){
+        if(phoneNum[0]=='1'){
+          if(phoneNum[1]=='3'||phoneNum[1]=='4'||phoneNum[1]=='5'||phoneNum[1]=='7'||phoneNum[1]=='8'){
+            return 0
+          }else{
+            return 1
+          }
+        }else{
+          return 2
+        }
+      }
+      else {
+        return 3
+      }
+    }
+    function saveNamePhone(table,name,phone,flag){
+      const db = wx.cloud.database()
+      db.collection(table).add({
+        // data 字段表示需新增的 JSON 数据
+        data: {
+          name:name,
+          phone:phone,
+          flag:flag,
+        }
+      })
+    }
   },
 
   canvasTouchStart: function (event) {
@@ -41,6 +126,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    this.iniDatabase()
+
     // 把设备的尺寸赋值给画布，以做到全屏效果
     wx.getSystemInfo({
       success: function (res) {
@@ -50,46 +137,45 @@ Page({
         });
       },
     })
+    const db = wx.cloud.database()
+
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
+  
   onReady: function () {
     wx.setNavigationBarTitle({
       title: '幸运大转盘',
     })
     const db = wx.cloud.database()
      var that = this
+
+
     db.collection('turntable').doc('prize').get().then(res=>{
-      var a= [
-        { text: "恭喜中了大奖1", img: "assets/gift.png" },
-        { text: "500 积分2", img: "assets/gift.png" },
-        { text: "谢谢参与3", img: "assets/gift.png" },
-        { text: "200 积分4", img: "assets/gift.png" },
-        { text: "100 积分5", img: "assets/gift.png" },
-        { text: "150 积分6", img: "assets/gift.png" },
-        { text: "谢谢参与7", img: "assets/gift.png" }
-      ]
-      console.log(res.data.奖励)
+      that.data.systemFlag=res.data.Flag
+      var prizeInfoNum =res.data.prizeInfo.length
+      var lenghTmp=prizeInfoNum*
+      console.log("长度",res.data.prizeInfo.length)
+     /*that.setData({
+        prizeInfo:res.data.prizeInfo
+       // prizeInfoLengh:
+      })*/
+     // console.log("ss",res.data.Flag)
       //slicePrizes=res.data.奖励
      var fps = 60,
      /* slicePrizes = ["恭喜中了大奖",  "500 积分", "谢谢参与", "200 积分", "100 积分", "150 积分", "谢谢参与"],*/
       slicePrizes = [
-        { text: "恭喜中了大奖1", img: "assets/gift.png" },
-        { text: "500 积分2", img: "assets/gift.png" },
-        { text: "谢谢参与3", img: "assets/gift.png" },
-        { text: "200 积分4", img: "assets/gift.png" },
-        { text: "100 积分5", img: "assets/gift.png" },
-        { text: "150 积分6", img: "assets/gift.png" },
-        { text: "谢谢参与7", img: "assets/gift.png" }
+        { text: "加载失败", img: "assets/gift.png" },
       ],
       w = this.data.windowWidth,
       h = this.data.windowHeight,
       context = wx.createCanvasContext('canvas')
       slicePrizes=res.data.奖励
-     var wheel = new Wheel(w / 2, h / 2.5, w / 2 - 50, slicePrizes),
-      point = new Pointer(w / 2, h / 2.5, 40, wheel),
+     var wheel = new Wheel(w / 2, w / 2, w / 2 - 50, slicePrizes),
+      point = new Pointer(w / 2, w / 2, 40, wheel),
       animation = new Animation(wheel, { w: w, h: h })
       ;
       

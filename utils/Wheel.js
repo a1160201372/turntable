@@ -78,10 +78,10 @@ Circle.prototype.draw = function (context) {
     context.fillText(prize.text, 0, (offset - 25) * -1)
 
     // 话圆点参考
-    // context.beginPath()
-    // context.arc(0, 0, 2, 0, 2 * Math.PI)
-    // context.setFillStyle('red')
-    // context.fill()
+     context.beginPath()
+     context.arc(0, 0, 2, 0, 2 * Math.PI)
+     context.setFillStyle('red')
+     context.fill()
 
     context.restore()
     context.rotate(angle * Math.PI / 180);

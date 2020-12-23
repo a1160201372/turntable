@@ -1,2 +1,35 @@
+<view  style='background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600937008483&di=5e1b3955e3b522a0b221616ee4dfda6c&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fd000baa1cd11728bb8fb7eb7c8fcc3cec2fd2c55.jpg)'>
+<canvas style='width: {{windowWidth}}px; height: {{windowWidth}}px' disable-scroll="false" bindtouchstart="canvasTouchStart" bindtouchmove="touchMove" bindtouchend="canvasTouchEnd" canvas-id="canvas"></canvas>
+</view>
+<view class="exchangeInfo">
 
-<canvas style='width: {{windowWidth}}px; height: {{windowHeight}}px' disable-scroll="true" bindtouchstart="canvasTouchStart" bindtouchmove="touchMove" bindtouchend="canvasTouchEnd" canvas-id="canvas"></canvas>
+<text class="exchangeHigh">兑奖信息</text>
+<text>\n\n</text>
+  <input style='border-radius: 17rpx; width: 640rpx; margin-left: 35rpx; height:30px' name="vocation" class="nameInput" adjust-position="{{true}}" data-index="1" bindinput="bindKeyProfession" placeholder="  请输入您的姓名" />
+ 
+  <input type ="number" style='border-radius: 17rpx;width: 640rpx; margin-left: 35rpx; margin-top: 20px;  height:30px' name="vocation" class="nameInput" adjust-position="{{true}}"  data-index="2" bindinput="bindKeyProfession" placeholder="  请输入您的手机号"  />
+
+  <button type ="primary" style='border-radius: 17rpx;width: 640rpx; margin-left: 35rpx; margin-top: 20px;  height:40px;  margin-bottom: 5px;' bindtap="bindingInfo" >绑定信息</button>
+  <text class="exchangeLow"> 每个微信号只能抽奖一次
+  </text>
+  <text class="exchangeLow">每个微信号只能绑定一个手机号！
+  </text>
+</view>
+<text>\n</text>
+
+
+<view class="prizeSet" style="width:710rpx"><text>奖项设置  </text></view>
+<block wx:for="{{prizeInfo}}">
+<view  class='prizeInfoText' >
+
+  <text style=" min-width: 140rpx;">{{item.set}}：</text>
+  <text >{{item.Info}}\n</text>
+  
+</view>
+</block>
+
+
+<text>\n</text>
+<text>\n</text>
+<text>\n</text>
+

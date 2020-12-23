@@ -1,8 +1,55 @@
 /* pages/main/main.wxss */
 page{
   height: 100%;
-}
+  color: rgb(0, 0, 0);
 
+}
 canvas{
-  border: solid 0px black
+  border: solid 0px black;
+  color: aquamarine;
+}
+.prizeSet{
+  font-size:35rpx;
+  background-color:#FFF8B2;
+
+}
+.exchangeInfo{
+  top: 500rpx;
+  left: 500rpx;
+  height: 250px;
+  margin-left: 20rpx;
+  width: 710rpx;
+  border-radius: 40rpx;
+  /*background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600937008483&di=5e1b3955e3b522a0b221616ee4dfda6c&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fd000baa1cd11728bb8fb7eb7c8fcc3cec2fd2c55.jpg);*/
+  background-color:#FFF8B2;
+
+}
+.nameInput{
+
+  background-color:#ffffff;
+  border-left: 4rpx solid rgb(117, 117, 117);
+  border-right: 4rpx solid rgb(117, 117, 117);
+  border-top: 4rpx solid rgb(117, 117, 117);
+  border-bottom: 4rpx solid rgb(117, 117, 117);
+}
+.nameInfo{
+  background-color:#9c3535;
+  height: 20px;
+  display: flex; /*设置显示样式**/
+  align-items: center; /**子view垂直居中*/
+  justify-content: center;
+}
+.exchangeLow{
+  font-size: 15px;
+  color: #666666;
+  display: flex; /*设置显示样式**/
+  align-items: center; /**子view垂直居中*/
+  justify-content: center;
+}
+.prizeInfoText{
+  font-size:35rpx;
+  background-color:#FFF8B2;
+  display: flex; /*设置显示样式**/
+  
+  
 }

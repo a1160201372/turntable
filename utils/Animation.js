@@ -69,9 +69,9 @@ Animation.prototype.draw = function (context) {
     }
   }
   // 画logo
-  var w = this.screen.w - 20;
+  /*var w = this.screen.w - 20;
   var h = 70;
-  context.drawImage("assets/logo.png", 10, 10, w, h);
+  context.drawImage("assets/logo.png", 10, 10, w, h);*/
 
   // 还原
   context.restore();
