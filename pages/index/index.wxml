@@ -1,9 +1,15 @@
-<view  style='background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600937008483&di=5e1b3955e3b522a0b221616ee4dfda6c&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fd000baa1cd11728bb8fb7eb7c8fcc3cec2fd2c55.jpg)'>
-<canvas style='width: {{windowWidth}}px; height: {{windowWidth}}px' disable-scroll="false" bindtouchstart="canvasTouchStart" bindtouchmove="touchMove" bindtouchend="canvasTouchEnd" canvas-id="canvas"></canvas>
-</view>
-<view class="exchangeInfo">
 
-<text class="exchangeHigh">兑奖信息</text>
+
+
+
+<!--<view  style='background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600937008483&di=5e1b3955e3b522a0b221616ee4dfda6c&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fd000baa1cd11728bb8fb7eb7c8fcc3cec2fd2c55.jpg)'>-->
+  
+  <view>
+<canvas style='width: {{windowWidth}}px; height: {{windowWidth+80}}px' disable-scroll="false" bindtouchstart="canvasTouchStart" bindtouchmove="touchMove" bindtouchend="canvasTouchEnd" canvas-id="canvas"></canvas>
+</view>
+
+<view wx:if="{{registerFlag==false}}" style="margin-top: 15px;height: 250px;" class="exchangeInfo">
+<text style="margin-top:200px; margin-left:300rpx;" class="exchangeHigh">兑奖信息</text>
 <text>\n\n</text>
   <input style='border-radius: 17rpx; width: 640rpx; margin-left: 35rpx; height:30px' name="vocation" class="nameInput" adjust-position="{{true}}" data-index="1" bindinput="bindKeyProfession" placeholder="  请输入您的姓名" />
  
@@ -15,21 +21,42 @@
   <text class="exchangeLow">每个微信号只能绑定一个手机号！
   </text>
 </view>
-<text>\n</text>
+
+<view wx:if="{{registerFlag==true}}" style="margin-top: 15px;height: 320px;" class="exchangeInfo">
+ 
+<text style=" margin-top:200px; margin-left:300rpx;" class="exchangeHigh">兑奖信息</text>
+
+  <text  style=" margin-top: 10px;" class="bindPhoneNum" >恭喜您获得一等奖 \n</text>
+
+<view style=" margin-top: 7px;" class="bindPhoneNum"  >已绑定的手机号码：{{phone}}\n</view>
+
+<canvas style=" margin-top: 7px; margin-left: 200rpx; width: 160px; height: 160px;" canvas-id="myQrcode" bindlongtap='save'></canvas>
+
+      <text style=" margin-top: 0rpx;"  class="exchangeLow"> 长按保存
+  </text>
+  <text class="exchangeLow"> 兑奖截止日期：2020年12月20日
+  </text>
+  <text  class="exchangeLow"> 通过手机号或二维码兑换奖品
+  </text>
+</view>
 
 
-<view class="prizeSet" style="width:710rpx"><text>奖项设置  </text></view>
+
+<view style=" margin-top: 15px;"  class="exchangeInfo">
+<text  style="margin-left:300rpx;;margin-top:300rpx;"> 奖项设置  </text>
 <block wx:for="{{prizeInfo}}">
 <view  class='prizeInfoText' >
 
-  <text style=" min-width: 140rpx;">{{item.set}}：</text>
+  <text style="margin-left: 20rpx; min-width: 140rpx;">{{item.set}}：</text>
   <text >{{item.Info}}\n</text>
   
 </view>
 </block>
-
+<text>\n</text>
+</view>
 
 <text>\n</text>
-<text>\n</text>
-<text>\n</text>
 
+
+<text class="exchangeLow"> 慧说口才提供技术支持
+  </text>
